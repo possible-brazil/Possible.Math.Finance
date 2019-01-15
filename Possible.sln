@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Possible.Math", "Source\Possible.Math\Possible.Math.csproj", "{8DD9A740-B940-40AF-83E0-E71478C31FD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Possible.Math.Test", "Possible.Math.Test\Possible.Math.Test.csproj", "{0E4772B8-8995-40CC-BAA4-C5D0D2033820}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Possible.Math.Test", "Source\Possible.Math.Test\Possible.Math.Test.csproj", "{0E4772B8-8995-40CC-BAA4-C5D0D2033820}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
