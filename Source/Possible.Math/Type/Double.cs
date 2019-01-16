@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Possible.Math.Enum;
 
@@ -49,7 +47,9 @@ namespace Possible.Math
 		/// <param name="Guess">Optional. Object specifying value you estimate will be returned by <see langword="IRR" />. If omitted, <paramref name="Guess" /> is 0.1 (10 percent).</param>
 		/// <returns>Returns a <see langword="Double" /> specifying the internal rate of return for a series of periodic cash flows (payments and receipts).</returns>
 		/// <exception cref="T:System.ArgumentException">Array argument values are invalid or <paramref name="Guess" /> &lt;= -1.</exception>
-		public static double IRR(ref double[] ValueArray, double Guess = 0.1)
+		public static double IRR(
+			ref double[] ValueArray, 
+			double Guess = 0.1)
 		{
 			int upperBound;
 			try
@@ -89,39 +89,39 @@ namespace Possible.Math
 				checked { ++index; }
 			}
 			var num4 = num2 * 1E-07 * 0.01;
-			var Guess1 = Guess;
-			var num5 = OptPV2(ref ValueArray, Guess1);
-			var Guess2 = num5 <= 0.0 ? Guess1 - 1E-05 : Guess1 + 1E-05;
-			if (Guess2 <= -1.0)
+			var guess1 = Guess;
+			var num5 = OptPV2(ref ValueArray, guess1);
+			var guess2 = num5 <= 0.0 ? guess1 - 1E-05 : guess1 + 1E-05;
+			if (guess2 <= -1.0)
 				throw new ArgumentException("Argument_InvalidValue Rate");
-			var num6 = OptPV2(ref ValueArray, Guess2);
+			var num6 = OptPV2(ref ValueArray, guess2);
 			var num7 = 0;
 			do
 			{
 				if (num6 == num5)
 				{
-					if (Guess2 > Guess1)
-						Guess1 -= 1E-05;
+					if (guess2 > guess1)
+						guess1 -= 1E-05;
 					else
-						Guess1 += 1E-05;
-					num5 = OptPV2(ref ValueArray, Guess1);
+						guess1 += 1E-05;
+					num5 = OptPV2(ref ValueArray, guess1);
 					if (num6 == num5)
 						throw new ArgumentException("Argument_InvalidValue");
 				}
-				var num8 = Guess2;
-				var Guess3 = num8 - (num8 - Guess1) * num6 / (num6 - num5);
-				if (Guess3 <= -1.0)
-					Guess3 = (Guess2 - 1.0) * 0.5;
-				var num9 = OptPV2(ref ValueArray, Guess3);
-				var num10 = Guess3 <= Guess2 ? Guess2 - Guess3 : Guess3 - Guess2;
+				var num8 = guess2;
+				var guess3 = num8 - (num8 - guess1) * num6 / (num6 - num5);
+				if (guess3 <= -1.0)
+					guess3 = (guess2 - 1.0) * 0.5;
+				var num9 = OptPV2(ref ValueArray, guess3);
+				var num10 = guess3 <= guess2 ? guess2 - guess3 : guess3 - guess2;
 				if ((num9 <= 0.0 ? -num9 : num9) < num4 && num10 < 1E-07)
-					return Guess3;
+					return guess3;
 				var num11 = num9;
 				num5 = num6;
 				num6 = num11;
-				var num12 = Guess3;
-				Guess1 = Guess2;
-				Guess2 = num12;
+				var num12 = guess3;
+				guess1 = guess2;
+				guess2 = num12;
 				checked { ++num7; }
 			}
 			while (num7 <= 39);
@@ -137,7 +137,12 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="Double" /> specifying the payment for an annuity based on periodic, fixed payments and a fixed interest rate.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="NPer" /> = 0.</exception>
-		public static double Pmt(double Rate, double NPer, double PV, double FV = 0.0, DueDate Due = DueDate.EndOfPeriod)
+		public static double Pmt(
+			double Rate, 
+			double NPer, 
+			double PV, 
+			double FV = 0.0, 
+			DueDate Due = DueDate.EndOfPeriod)
 		{
 			return PMT_Internal(Rate, NPer, PV, FV, Due);
 		}
@@ -189,7 +194,9 @@ namespace Possible.Math
 		}
 
 
-		private static double OptPV2(ref double[] ValueArray, double Guess = 0.1)
+		private static double OptPV2(
+			ref double[] ValueArray,
+			double Guess = 0.1)
 		{
 			var index1 = 0;
 			var upperBound = ValueArray.GetUpperBound(0);
@@ -229,7 +236,10 @@ namespace Possible.Math
 			return num1;
 		}
 
-		private static double LDoNPV(double Rate, ref double[] ValueArray, int iWNType)
+		private static double LDoNPV(
+			double Rate,
+			ref double[] ValueArray,
+			int iWNType)
 		{
 			var flag1 = iWNType < 0;
 			var flag2 = iWNType > 0;
@@ -279,7 +289,11 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="Double" /> specifying the sum-of-years digits depreciation of an asset for a specified period.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="Salvage" /> &lt; 0, <paramref name="Period" /> &gt; <paramref name="Life" />, or <paramref name="Period" /> &lt;=0.</exception>
-		public static double SYD(double Cost, double Salvage, double Life, double Period)
+		public static double SYD(
+			double Cost,
+			double Salvage,
+			double Life,
+			double Period)
 		{
 			if (Salvage < 0.0)
 				throw new ArgumentException("Financial_ArgGEZero Salvage");
@@ -300,7 +314,10 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="Double" /> specifying the straight-line depreciation of an asset for a single period.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="Life" /> = 0.</exception>
-		public static double SLN(double Cost, double Salvage, double Life)
+		public static double SLN(
+			double Cost,
+			double Salvage,
+			double Life)
 		{
 			if (Life == 0.0)
 				throw new ArgumentException("Financial_LifeNEZero");
@@ -395,7 +412,9 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="Double" /> specifying the net present value of an investment based on a series of periodic cash flows (payments and receipts) and a discount rate.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="ValueArray" /> is <see langword="Nothing" />, rank of <paramref name="ValueArray" /> &lt;&gt; 1, or <paramref name="Rate" /> = -1 </exception>
-		public static double NPV(double Rate, ref double[] ValueArray)
+		public static double NPV(
+			double Rate,
+			ref double[] ValueArray)
 		{
 			if (ValueArray == null)
 				throw new ArgumentException("Argument_InvalidNullValue ValueArray");
@@ -462,7 +481,12 @@ namespace Possible.Math
 		/// <param name="PV">Optional. <see langword="Double" /> specifying present value (or lump sum) of a series of future payments. For example, when you borrow money to buy a car, the loan amount is the present value to the lender of the monthly car payments you will make. If omitted, 0 is assumed.</param>
 		/// <param name="Due">Optional. Object of type <see cref="T:Microsoft.VisualBasic.DueDate" /> that specifies when payments are due. This argument must be either <see langword="DueDate.EndOfPeriod" /> if payments are due at the end of the payment period, or <see langword="DueDate.BegOfPeriod" /> if payments are due at the beginning of the period. If omitted, <see langword="DueDate.EndOfPeriod" /> is assumed.</param>
 		/// <returns>Returns a <see langword="Double" /> specifying the future value of an annuity based on periodic, fixed payments and a fixed interest rate.</returns>
-		public static double FV(double Rate, double NPer, double Pmt, double PV = 0.0, DueDate Due = DueDate.EndOfPeriod)
+		public static double FV(
+			double Rate,
+			double NPer,
+			double Pmt,
+			double PV = 0.0,
+			DueDate Due = DueDate.EndOfPeriod)
 		{
 			return FV_Internal(Rate, NPer, Pmt, PV, Due);
 		}

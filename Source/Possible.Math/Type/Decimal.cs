@@ -50,7 +50,9 @@ namespace Possible.Math
 		/// <param name="Guess">Optional. Object specifying value you estimate will be returned by <see langword="IRR" />. If omitted, <paramref name="Guess" /> is 0.1 (10 percent).</param>
 		/// <returns>Returns a <see langword="decimal" /> specifying the internal rate of return for a series of periodic cash flows (payments and receipts).</returns>
 		/// <exception cref="T:System.ArgumentException">Array argument values are invalid or <paramref name="Guess" /> &lt;= -1.</exception>
-		public static decimal IRR(ref decimal[] ValueArray, decimal Guess = 0.1M)
+		public static decimal IRR(
+			ref decimal[] ValueArray,
+			decimal Guess = 0.1M)
 		{
 			int upperBound;
 			try
@@ -138,7 +140,12 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="decimal" /> specifying the payment for an annuity based on periodic, fixed payments and a fixed interest rate.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="NPer" /> = 0.</exception>
-		public static decimal Pmt(decimal Rate, decimal NPer, decimal PV, decimal FV = 0.0M, DueDate Due = DueDate.EndOfPeriod)
+		public static decimal Pmt(
+			decimal Rate,
+			decimal NPer,
+			decimal PV,
+			decimal FV = 0.0M,
+			DueDate Due = DueDate.EndOfPeriod)
 		{
 			return PMT_Internal(Rate, NPer, PV, FV, Due);
 		}
@@ -190,7 +197,9 @@ namespace Possible.Math
 		}
 
 
-		private static decimal OptPV2(ref decimal[] ValueArray, decimal Guess = 0.1M)
+		private static decimal OptPV2(
+			ref decimal[] ValueArray,
+			decimal Guess = 0.1M)
 		{
 			var index1 = 0;
 			var upperBound = ValueArray.GetUpperBound(0);
@@ -230,7 +239,10 @@ namespace Possible.Math
 			return num1;
 		}
 
-		private static decimal LDoNPV(decimal Rate, ref decimal[] ValueArray, int iWNType)
+		private static decimal LDoNPV(
+			decimal Rate,
+			ref decimal[] ValueArray,
+			int iWNType)
 		{
 			var flag1 = iWNType < 0;
 			var flag2 = iWNType > 0;
@@ -280,7 +292,11 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="decimal" /> specifying the sum-of-years digits depreciation of an asset for a specified period.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="Salvage" /> &lt; 0, <paramref name="Period" /> &gt; <paramref name="Life" />, or <paramref name="Period" /> &lt;=0.</exception>
-		public static decimal SYD(decimal Cost, decimal Salvage, decimal Life, decimal Period)
+		public static decimal SYD(
+			decimal Cost,
+			decimal Salvage,
+			decimal Life,
+			decimal Period)
 		{
 			if (Salvage < 0.0M)
 				throw new ArgumentException("Financial_ArgGEZero Salvage");
@@ -301,7 +317,10 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="decimal" /> specifying the straight-line depreciation of an asset for a single period.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="Life" /> = 0.</exception>
-		public static decimal SLN(decimal Cost, decimal Salvage, decimal Life)
+		public static decimal SLN(
+			decimal Cost,
+			decimal Salvage,
+			decimal Life)
 		{
 			if (Life == 0.0M)
 				throw new ArgumentException("Financial_LifeNEZero");
@@ -396,7 +415,9 @@ namespace Possible.Math
 		/// <returns>Returns a <see langword="decimal" /> specifying the net present value of an investment based on a series of periodic cash flows (payments and receipts) and a discount rate.</returns>
 		/// <exception cref="T:System.ArgumentException">
 		/// <paramref name="ValueArray" /> is <see langword="Nothing" />, rank of <paramref name="ValueArray" /> &lt;&gt; 1, or <paramref name="Rate" /> = -1 </exception>
-		public static decimal NPV(decimal Rate, ref decimal[] ValueArray)
+		public static decimal NPV(
+			decimal Rate,
+			ref decimal[] ValueArray)
 		{
 			if (ValueArray == null)
 				throw new ArgumentException("Argument_InvalidNullValue ValueArray");
@@ -463,7 +484,12 @@ namespace Possible.Math
 		/// <param name="PV">Optional. <see langword="decimal" /> specifying present value (or lump sum) of a series of future payments. For example, when you borrow money to buy a car, the loan amount is the present value to the lender of the monthly car payments you will make. If omitted, 0 is assumed.</param>
 		/// <param name="Due">Optional. Object of type <see cref="T:Microsoft.VisualBasic.DueDate" /> that specifies when payments are due. This argument must be either <see langword="DueDate.EndOfPeriod" /> if payments are due at the end of the payment period, or <see langword="DueDate.BegOfPeriod" /> if payments are due at the beginning of the period. If omitted, <see langword="DueDate.EndOfPeriod" /> is assumed.</param>
 		/// <returns>Returns a <see langword="decimal" /> specifying the future value of an annuity based on periodic, fixed payments and a fixed interest rate.</returns>
-		public static decimal FV(decimal Rate, decimal NPer, decimal Pmt, decimal PV = 0.0M, DueDate Due = DueDate.EndOfPeriod)
+		public static decimal FV(
+			decimal Rate,
+			decimal NPer,
+			decimal Pmt,
+			decimal PV = 0.0M,
+			DueDate Due = DueDate.EndOfPeriod)
 		{
 			return FV_Internal(Rate, NPer, Pmt, PV, Due);
 		}
