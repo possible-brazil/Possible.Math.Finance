@@ -5,7 +5,7 @@ namespace Possible.Math.Test
 	public class IRR
 	{
 		[Fact]
-		public void IRR_Vindo_Cotizador()
+		public void IRR_Ok()
 		{
 			var arrDouble = new[]
 			{

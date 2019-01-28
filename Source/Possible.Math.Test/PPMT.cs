@@ -7,7 +7,7 @@ namespace Possible.Math.Test
 	public class PPMT
 	{
 		[Fact]
-		public void PPMT_Vindo_Cotizador()
+		public void PPMT_Ok()
 		{
 			var resultadoDecimal = System.Math.Round(Possible.Math.Financial.PPmt(0.025M/12, 1,24, -1000, 0),2);
 
