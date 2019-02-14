@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/possible-brazil/Possible.Math.Finance</RepositoryUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Victor Ochoa</Authors>
+    <PackageLicenseUrl>https://github.com/possible-brazil/Possible.Math.Finance/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
 </Project>
