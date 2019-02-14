@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Possible</Company>
+    <Description>Converting class Microsoft.VisualBasic.Financial to .Net Standard</Description>
+    <PackageProjectUrl>https://github.com/possible-brazil/Possible.Math.Finance</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/possible-brazil/Possible.Math.Finance</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Victor Ochoa</Authors>
   </PropertyGroup>
 
 </Project>
